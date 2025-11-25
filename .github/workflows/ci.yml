@@ -64,4 +64,4 @@ jobs:
 
       - name: Run QA evaluation
         run: |
-          python -m travelai.eval.qa_evaluation
+          python -m travelai.eval.qa_eval
