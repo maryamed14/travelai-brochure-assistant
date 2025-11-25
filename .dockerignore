@@ -1,0 +1,23 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Git
+.git
+.gitignore
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Local data artifacts (we rebuild processed data in the image)
+data/processed/
+
+# OS junk
+.DS_Store
+Thumbs.db
