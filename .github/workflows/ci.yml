@@ -63,7 +63,5 @@ jobs:
           python -m travelai.data_ingestion
 
       - name: Run QA evaluation
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          python -m travelai.eval.qa_eval
+          python -m travelai.eval.qa_evaluation
