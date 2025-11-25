@@ -61,6 +61,7 @@ jobs:
 
       - name: Run QA evaluation
         env:
+          PYTHONPATH: .
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python -m travelai.eval.qa_eval
