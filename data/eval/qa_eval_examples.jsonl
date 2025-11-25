@@ -1,0 +1,5 @@
+{"id": 1, "question": "Which hotel in New York has views of Central Park?", "expected_city": "New York Brochure", "expected_contains": "Park Hotel"}
+{"id": 2, "question": "Name one hotel in London and what it is close to.", "expected_city": "London Brochure", "expected_contains": "Buckingham Hotel"}
+{"id": 3, "question": "Which city is known for casinos and entertainment according to the brochures?", "expected_city": "Las Vegas Brochure", "expected_contains": "Las Vegas"}
+{"id": 4, "question": "What is one popular attraction area in San Francisco mentioned in the brochures?", "expected_city": "San Francisco Brochure", "expected_contains": "Fisherman’s Wharf"}
+{"id": 5, "question": "Which hotel in Dubai has an onsite waterpark and aquarium?", "expected_city": "Dubai Brochure", "expected_contains": "Lost City Hotel"}
