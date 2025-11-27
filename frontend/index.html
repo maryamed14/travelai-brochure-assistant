@@ -9,7 +9,9 @@
   <div class="app-container">
     <header class="app-header">
       <h1>TravelAI Brochure Assistant</h1>
-      <p class="subtitle">Ask questions about the travel brochures using RAG & agents.</p>
+      <p class="subtitle">
+        Ask questions about the travel brochures using RAG (QA) or the Agent.
+      </p>
     </header>
 
     <section class="mode-switch">
@@ -19,27 +21,30 @@
       </label>
       <label>
         <input type="radio" name="mode" value="agent" />
-        Agent (ReAct + tools)
+        Agent (tools)
       </label>
     </section>
 
     <section class="input-section">
       <label for="question">Your question</label>
-      <textarea id="question" rows="3" placeholder="e.g. Which hotel in New York has views of Central Park?"></textarea>
+      <textarea
+        id="question"
+        rows="3"
+        placeholder="e.g. Which hotel in New York has views of Central Park?"
+      ></textarea>
       <button id="ask-btn">Ask</button>
       <div id="status" class="status hidden"></div>
     </section>
 
     <section class="output-section">
-  <div class="card">
-    <h2>Answer</h2>
-    <div id="answer" class="answer"></div>
+      <div class="card">
+        <h2>Answer</h2>
+        <div id="answer" class="answer"></div>
+      </div>
+    </section>
   </div>
-</section>
 
-
-      
-
+  <!-- IMPORTANT: script at the end, correct path -->
   <script src="/static/app.js"></script>
 </body>
 </html>

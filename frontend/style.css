@@ -10,13 +10,9 @@ body {
 }
 
 .app-container {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 24px 16px 40px;
-}
-
-.app-header {
-  margin-bottom: 16px;
 }
 
 .app-header h1 {
@@ -25,7 +21,7 @@ body {
 }
 
 .subtitle {
-  margin: 4px 0 0;
+  margin-top: 4px;
   color: #9ca3af;
   font-size: 0.95rem;
 }
@@ -34,18 +30,6 @@ body {
   margin: 16px 0 20px;
   display: flex;
   gap: 16px;
-  font-size: 0.95rem;
-}
-
-.mode-switch label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-
-.input-section {
-  margin-bottom: 20px;
 }
 
 .input-section label {
@@ -56,14 +40,13 @@ body {
 
 textarea {
   width: 100%;
-  resize: vertical;
   min-height: 80px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #1f2937;
   background: #020617;
   color: #e5e7eb;
-  font-family: inherit;
+  resize: vertical;
 }
 
 textarea:focus {
@@ -80,7 +63,6 @@ textarea:focus {
   color: white;
   font-weight: 500;
   cursor: pointer;
-  font-size: 0.95rem;
 }
 
 #ask-btn:disabled {
@@ -101,8 +83,16 @@ textarea:focus {
 .hidden {
   display: none;
 }
-.output-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 16px;
+
+.output-section .card {
+  margin-top: 20px;
+  background: #020617;
+  border-radius: 12px;
+  padding: 14px 14px 16px;
+  border: 1px solid #1f2937;
+}
+
+.answer {
+  white-space: pre-wrap;
+  font-size: 0.95rem;
 }

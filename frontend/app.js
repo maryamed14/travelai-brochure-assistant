@@ -1,9 +1,13 @@
 const questionInput = document.getElementById("question");
 const askBtn = document.getElementById("ask-btn");
 const answerEl = document.getElementById("answer");
-const contextEl = document.getElementById("context");
-const contextCard = document.getElementById("context-card");
 const statusEl = document.getElementById("status");
+
+// Basic sanity check
+console.log("questionInput:", questionInput);
+console.log("askBtn:", askBtn);
+console.log("answerEl:", answerEl);
+console.log("statusEl:", statusEl);
 
 function getMode() {
   const checked = document.querySelector('input[name="mode"]:checked');
@@ -16,7 +20,8 @@ function setLoading(isLoading, mode) {
   statusEl.classList.remove("error");
 
   if (isLoading) {
-    statusEl.textContent = mode === "qa" ? "Running RAG QA..." : "Running agent with tools...";
+    statusEl.textContent =
+      mode === "qa" ? "Running RAG QA..." : "Running agent with tools...";
   } else {
     statusEl.textContent = "";
   }
@@ -30,59 +35,43 @@ function showError(message) {
 
 async function callBackend(question, mode) {
   const endpoint = mode === "qa" ? "/qa" : "/agent";
+  console.log("Calling", endpoint, "with question:", question);
 
   const res = await fetch(endpoint, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ question }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question: question }),
   });
+
+  console.log("Response status:", res.status);
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Request failed: ${res.status} ${text}`);
+    throw new Error("Request failed: " + res.status + " " + text);
   }
 
-  return res.json();
+  const data = await res.json();
+  console.log("Response JSON:", data);
+  return data;
 }
 
 function renderQAResponse(data) {
-  answerEl.textContent = data.answer ?? "";
-
-  const ctx = data.context ?? [];
-  contextEl.innerHTML = "";
-
-  if (!ctx.length) {
-    contextEl.textContent = "No context chunks returned.";
-    return;
+  if (data && typeof data.answer === "string") {
+    answerEl.textContent = data.answer;
+  } else {
+    answerEl.textContent = JSON.stringify(data, null, 2);
   }
-
-  ctx.forEach((chunk, idx) => {
-    const div = document.createElement("div");
-    div.className = "context-item";
-
-    const meta = document.createElement("div");
-    meta.className = "context-meta";
-    meta.textContent = `#${idx + 1} | ${chunk.city} | ${chunk.source_file} | score=${chunk.score.toFixed?.(3) ?? chunk.score}`;
-
-    const text = document.createElement("div");
-    text.className = "context-text";
-    text.textContent = chunk.text;
-
-    div.appendChild(meta);
-    div.appendChild(text);
-    contextEl.appendChild(div);
-  });
 }
 
 function renderAgentResponse(data) {
-  answerEl.textContent = data.answer ?? JSON.stringify(data, null, 2);
-  contextEl.innerHTML = "";
-  contextEl.textContent = "Agent mode does not expose retrieval chunks directly.";
+  if (data && typeof data.answer === "string") {
+    answerEl.textContent = data.answer;
+  } else {
+    answerEl.textContent = JSON.stringify(data, null, 2);
+  }
 }
 
-askBtn.addEventListener("click", async () => {
+askBtn.addEventListener("click", async function () {
   const question = questionInput.value.trim();
   const mode = getMode();
 
@@ -93,20 +82,20 @@ askBtn.addEventListener("click", async () => {
 
   setLoading(true, mode);
   answerEl.textContent = "";
-  contextEl.textContent = "";
-  contextEl.innerHTML = "";
-  contextCard.style.display = mode === "qa" ? "block" : "block"; // keep card but change content
+  statusEl.classList.remove("error");
 
   try {
     const data = await callBackend(question, mode);
+
     if (mode === "qa") {
       renderQAResponse(data);
     } else {
       renderAgentResponse(data);
     }
+
     setLoading(false, mode);
   } catch (err) {
-    console.error(err);
+    console.error("Frontend error:", err);
     setLoading(false, mode);
     showError(err.message || "Something went wrong.");
   }
