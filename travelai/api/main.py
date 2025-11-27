@@ -5,6 +5,11 @@ from typing import Optional, List
 
 from fastapi import FastAPI
 from pydantic import BaseModel
+from pathlib import Path
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
 
 # Load environment variables (OPENAI_API_KEY) from .env
 from dotenv import load_dotenv
@@ -52,6 +57,22 @@ app = FastAPI(
     description="Semantic search, RAG QA, and agentic reasoning over travel brochures.",
     version="0.3.0",
 )
+
+# Serve frontend (static UI)
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+FRONTEND_DIR = BASE_DIR / "frontend"
+
+# Mount /static → serves JS + CSS
+app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
+
+
+@app.get("/", response_class=FileResponse)
+def serve_frontend():
+    """
+    Serve the main UI.
+    """
+    index_path = FRONTEND_DIR / "index.html"
+    return FileResponse(str(index_path))
 
 
 @lru_cache(maxsize=1)

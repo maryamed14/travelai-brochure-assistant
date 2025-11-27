@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TravelAI Brochure Assistant</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>TravelAI Brochure Assistant</h1>
+      <p class="subtitle">Ask questions about the travel brochures using RAG & agents.</p>
+    </header>
+
+    <section class="mode-switch">
+      <label>
+        <input type="radio" name="mode" value="qa" checked />
+        QA (RAG)
+      </label>
+      <label>
+        <input type="radio" name="mode" value="agent" />
+        Agent (ReAct + tools)
+      </label>
+    </section>
+
+    <section class="input-section">
+      <label for="question">Your question</label>
+      <textarea id="question" rows="3" placeholder="e.g. Which hotel in New York has views of Central Park?"></textarea>
+      <button id="ask-btn">Ask</button>
+      <div id="status" class="status hidden"></div>
+    </section>
+
+    <section class="output-section">
+  <div class="card">
+    <h2>Answer</h2>
+    <div id="answer" class="answer"></div>
+  </div>
+</section>
+
+
+      
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
