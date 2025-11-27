@@ -22,8 +22,6 @@ GitHub Actions CI
 
 Offline retrieval evaluation
 
-LangSmith tracing for deep visibility
-
 ✨ Features
 🔍 PDF → RAG Dataset
 
@@ -100,3 +98,62 @@ Run retrieval evaluation (offline, deterministic)
 🏗 Architecture
 PDFs → Ingestion → brochures.jsonl → Retriever → QA Pipeline → FastAPI
 ↘ ReAct Agent + Tools
+
+🔧 Setup
+
+Clone:
+
+git clone https://github.com/maryamed14/travelai-brochure-assistant
+cd travelai-brochure-assistant
+
+Create virtual environment:
+
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+Environment variables (.env):
+
+OPENAI_API_KEY=sk-...
+
+▶️ Running Locally
+
+Ingest brochures:
+
+python -m travelai.data_ingestion
+
+Run API:
+uvicorn travelai.api.main:app --reload
+Swagger UI:
+http://localhost:8000/docs
+
+🧪 Retrieval Evaluation
+Offline evaluation
+
+python -m travelai.eval.qa_eval
+Metrics shown:
+
+City Hit Rate
+
+Answer Hit Rate
+
+Runs automatically in CI.
+
+🚦 CI/CD
+GitHub Actions:
+
+Install deps
+
+Run pytest
+
+Build Docker image
+
+Run ingestion
+
+Run evaluation
+
+All green before merging.
+
+🐳 Docker
+Build:
+docker build -t travelai-brochure-assistant .
