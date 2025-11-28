@@ -1,3 +1,21 @@
+## 🚀 Live Demo
+
+Try the TravelAI Brochure Assistant live on Hugging Face Spaces:
+
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-blue)](https://huggingface.co/spaces/Rema2/travelai-brochure-assistant)
+
+The Space runs the complete system:
+- FastAPI backend (search, QA, and agent endpoints)
+- Semantic search over brochure chunks
+- RAG question answering using OpenAI models
+- Agent with tool-calling (brochure search + city summary)
+- Frontend UI for easy interaction
+
+Click the badge above to try it!
+
+
+
+
 🧭 TravelAI Brochure Assistant
 
 A Retrieval-Augmented Generation (RAG) system + ReAct Agent for answering travel questions using real PDF brochures.
@@ -157,3 +175,4 @@ All green before merging.
 🐳 Docker
 Build:
 docker build -t travelai-brochure-assistant .
+
